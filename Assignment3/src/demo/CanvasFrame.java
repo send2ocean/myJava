@@ -63,7 +63,7 @@ public class CanvasFrame extends javax.swing.JFrame  {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("<html> <a href=\"\">Key</a> <ul> \t<li> <font color=orange size=3>Ambulance</font> </li> \t<li><font color=blue size=3>Patient</font> </li> \t<li><font color=green size=3>Station</font> </li> \t<li><font color=red size=3>Hospital</font> </li> </ul> </html>");
+        jLabel2.setText("<html>    \t <a href=\"\">Key</a> <br> \t  \t &nbsp; <font color=orange size=3>&omicron;  Ambulance</font><br> \t &nbsp; <font color=blue size=3>&omicron;  Patient</font><br> \t &nbsp; <font color=green size=3>&omicron;  Station</font><br> \t &nbsp; <font color=red size=3>&omicron;  Hospital</font>     \t</html>");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

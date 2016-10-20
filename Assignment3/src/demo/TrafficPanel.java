@@ -68,7 +68,7 @@ public class TrafficPanel extends javax.swing.JPanel   {
 //         Graphics2D g2d = (Graphics2D)g; 
         if(g!=null){
             super.paint(g);
-                     System.out.println("size:"+pointList.size());
+                     System.out.println("redraw run,point length is "+pointList.size());
              for(int i=0;i<pointList.size();i++){
                  Point p = pointList.get(i);
 //                 System.out.println(p.getX());

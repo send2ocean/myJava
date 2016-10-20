@@ -13,7 +13,6 @@ import java.awt.Color;
  */
 public class Application {
     //
-    public static int duration =30;
     public static Point HostpitalPoint = new Point(50,50,Color.RED);
 
     public Application() {

@@ -5,10 +5,10 @@
  */
 package demo;
 
+import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +22,9 @@ public class MyFrame extends javax.swing.JFrame {
     public Vector colunms = new Vector();
     public Vector dataRows = new Vector();
     DefaultTableModel model ;
+    public boolean isStart = false;
+    public long startTime = 0;
+    public int duration = 60;
     /**
      * Creates new form NewJFrame
      */
@@ -143,8 +146,11 @@ public class MyFrame extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         jButton1.setEnabled(false);
-        String duration = jTextField1.getText();
-        Application.duration = Integer.valueOf(duration);
+        jTable1.setEnabled(false);
+        isStart = true;
+        startTime += new Date() .getTime();
+        String durationTxt = jTextField1.getText();
+        duration = Integer.valueOf(durationTxt);
         
         j1 = new CanvasFrame();
 
@@ -194,10 +200,16 @@ public class MyFrame extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
+        isStart = false;
+        long currentTime = new Date() .getTime();
+        startTime = currentTime - startTime;
+        
         //save data from simulationData obj
         SimulatioinUtil.saveCSV(data);
+        //jButton2.setEnabled(false);
+        jButton1.setEnabled(true);
         //exit 
-        System.exit(0);
+        //System.exit(0);
     }//GEN-LAST:event_jButton2MouseClicked
     
 
@@ -272,7 +284,17 @@ public class Worker implements Runnable {
         @Override
         public void run() {
             while (true) {
-                
+                long currentTime = new Date() .getTime();
+                long p = currentTime - startTime;
+                if (p>duration*1000){
+                    isStart = false;
+                    //save data from simulationData obj
+                    SimulatioinUtil.saveCSV(data);
+                    jButton2.setEnabled(false);
+                    jButton1.setEnabled(false);
+                    System.out.println("programe runing time is "+p);
+                    break;
+                }
                 //check ,if have new patient
                 Patient patient = data.getUnassignedPatient();
                 if(patient!=null){
@@ -303,10 +325,13 @@ public class Worker implements Runnable {
                     }
                 }
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
 //                    System.out.println(Thread.currentThread().getName() + "=" + shared);
-                    refreshTable();
-                    redraw();
+                    if(isStart){
+                        refreshTable();
+                        redraw();
+                     }
+                    
                     
                 } catch (InterruptedException ex) {
                     Logger.getLogger(CanvasFrame.class.getName()).log(Level.SEVERE, null, ex);

@@ -116,7 +116,7 @@ public class SimulationData {
         List<Ambulance>  result = new ArrayList<>();
          for(Ambulance amb:this.ambulances){
              String st = amb.getStatus() ;
-             if("At Station".equals( st )){
+             if("At Station".equals( st ) && amb.getPatient() == null){
                  result.add(amb);
              } 
          }

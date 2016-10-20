@@ -28,6 +28,7 @@ public class Ambulance {
     }
     
     public Ambulance(String csvLines){
+         csvLines = csvLines.replace("\"", "");
          String[] parts = csvLines.split(",");
             id =  parts[0];
             int _x = Integer.parseInt(parts[1]);
@@ -117,8 +118,8 @@ public class Ambulance {
     public String getLine(){
         	return "" + id + "," +
 				Integer.toString(this.localPoint.getX()) + "," + 
-				Integer.toString(this.localPoint.getY()) + ",\"" + 
-				status + "\"," +
+				Integer.toString(this.localPoint.getY()) + "," + 
+				status + "," +
 				(this.getPatient() == null ? "" : this.getPatient().getId());
     }
     

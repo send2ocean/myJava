@@ -23,6 +23,7 @@ public class Patient {
         
     }
     public Patient(String csvLineData) {
+        csvLineData = csvLineData.replace("\"", "");
         String[] parts = csvLineData.split(",");
             id = Integer.parseInt(parts[0]);
             int _x = Integer.parseInt(parts[1]);
@@ -94,10 +95,10 @@ public class Patient {
     }
     
      public String getLine(){
-        	return "\"" + id + "\"," +
+        	return "" + id + "," +
 				Integer.toString(this.localPoint.getX()) + "," + 
-				Integer.toString(this.localPoint.getY()) + ",\"" + 
-				status + "\"," +
+				Integer.toString(this.localPoint.getY()) + "," + 
+				status + "," +
 				(this.getAmbulance()== null ? "" : this.getAmbulance().getId());
     }
 
